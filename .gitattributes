@@ -1,0 +1,6 @@
+* 		text=auto
+
+*.java 		text
+*.gradle	text
+*.xml		text
+*.md		text
