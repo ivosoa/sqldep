@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db:configuration>
+    <db:url></db:url>
+    <db:user></db:user>
+    <db:password></db:password>
+    <db:jdbdriver></db:jdbdriver>
+</db:configuration>

@@ -8,6 +8,8 @@ package com.iso.xml;
 import com.iso.db.beans.DBConfig;
 import java.io.File;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -34,5 +36,41 @@ public class ParseHelperTest {
         assertEquals("usertest", config.getUser());
         assertEquals("passwordtest", config.getPassword());
         assertEquals("jdbcDriverTest", config.getJdbcDriver());
+    }
+    
+    @Test
+    public void testParseConfigNull(){
+        File configFile = null;
+        
+        DBConfig config = pHelper.parseConfig(configFile);
+        assertNull(config);
+    }
+    
+    @Test
+    public void testParseEmptyConfig(){
+        File configFile = new File(getClass().getResource("dbconfigempty.xml").getPath());
+        
+        DBConfig config = pHelper.parseConfig(configFile);
+        
+        assertNotNull(config);
+        
+        assertNull(config.getDbUrl());
+        assertNull(config.getUser());
+        assertNull(config.getPassword());
+        assertNull(config.getJdbcDriver());
+    }
+    
+    @Test
+    public void testParseEmptyEntries(){
+        File configFile = new File(getClass().getResource("dbconfigemptyentries.xml").getPath());
+        
+        DBConfig config = pHelper.parseConfig(configFile);
+        
+        assertNotNull(config);
+        
+        assertEquals("", config.getDbUrl());
+        assertEquals("", config.getUser());
+        assertEquals("", config.getPassword());
+        assertEquals("", config.getJdbcDriver());
     }
 }

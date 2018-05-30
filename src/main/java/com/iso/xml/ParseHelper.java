@@ -24,6 +24,10 @@ public class ParseHelper {
     
     public DBConfig parseConfig(File configFile){
         
+        if(configFile == null){
+            return null;
+        }
+        
         try {
             SAXParserFactory factory = SAXParserFactory.newInstance();
             SAXParser parser = factory.newSAXParser();
