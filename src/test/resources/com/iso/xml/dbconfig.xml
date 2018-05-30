@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<db:configuration>
+    <db:url>urltest</db:url>
+    <db:user>usertest</db:user>
+    <db:password>passwordtest</db:password>
+    <db:jdbdriver>jdbcDriverTest</db:jdbdriver>
+</db:configuration>
