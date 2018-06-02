@@ -26,11 +26,6 @@ public class ConfigHandlerTest {
     @Test
     public void testEmptyConfiguration(){
         
-//        private final static String CONFIG_ROOT_TAG = "db:configuration";
-//    private final static String CONFIG_URL_TAG = "db:url";
-//    private final static String CONFIG_USER_TAG = "db:user";
-//    private final static String CONFIG_PASSWORD_TAG = "db:password";
-//    private final static String CONFIG_JDBC_DRIVER_TAG = "db:jdbdriver";
         ConfigHandler handler = new ConfigHandler();
         handler.startElement(null, null, "db:configuration", null);
         handler.endElement(null, null, "db:configuration");
