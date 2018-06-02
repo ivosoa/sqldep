@@ -7,6 +7,7 @@ package com.iso.xml;
 
 import com.iso.db.beans.DBConfig;
 import java.io.File;
+import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
@@ -73,4 +74,21 @@ public class ParseHelperTest {
         assertEquals("", config.getPassword());
         assertEquals("", config.getJdbcDriver());
     }
+    
+     @Test
+    public void testSQLStatements(){
+        File file = new File(getClass().getResource("sql.xml").getPath());
+        
+        List<SQLBean> sqlBeans = pHelper.parseSqlStatements(file);
+        
+        assertNotNull(sqlBeans);
+        
+        for(SQLBean sqlBean: sqlBeans){
+            assertNotNull(sqlBean);
+            assertNotNull(sqlBean.getSqlStatement());
+            assertEquals(1, sqlBean.getPreconditions().size());
+            assertEquals(1, sqlBean.getPostconditions().size());
+        }
+    }
+    
 }

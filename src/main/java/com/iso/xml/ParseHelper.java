@@ -7,8 +7,10 @@ package com.iso.xml;
 
 import com.iso.db.beans.DBConfig;
 import com.iso.xml.handler.ConfigHandler;
+import com.iso.xml.handler.SqlContentHandler;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
@@ -46,8 +48,33 @@ public class ParseHelper {
             Logger.getLogger(ParseHelper.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        
         return null;
     }
+    
+    public List<SQLBean> parseSqlStatements(File file){
+        if(file == null){
+            return null;
+        }
+        
+        try {
+            SAXParserFactory factory = SAXParserFactory.newInstance();
+            SAXParser parser = factory.newSAXParser();
+            
+            SqlContentHandler handler = new SqlContentHandler();
+            parser.parse(file, handler);
+            
+            
+            return handler.getSqlBeans();
+            
+        } catch (ParserConfigurationException ex) {
+            Logger.getLogger(ParseHelper.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SAXException ex) {
+            Logger.getLogger(ParseHelper.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(ParseHelper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null;
+    } 
     
 }
