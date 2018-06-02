@@ -3,7 +3,7 @@ apply plugin: 'java'
 sourceCompatibility = '1.8'
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
-def mainClass = 'com.iso.main.SqlDepMain';
+def mainClass = 'com.iso.Application';
 
 // NetBeans will automatically add "run" and "debug" tasks relying on the
 // "mainClass" property. You may however define the property prior executing
