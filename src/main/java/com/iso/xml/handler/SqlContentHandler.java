@@ -19,7 +19,7 @@ import org.xml.sax.helpers.DefaultHandler;
  *
  * @author isoares
  */
-public class SqlContentHandler extends DefaultHandler{
+public class SqlContentHandler extends AbstractHandler{
     private final static String CONFIG_ROOT_TAG = "sql:statements";
     private final static String CONFIG_SQL_STATEMENT_TAG = "sql:statement";
     private final static String CONFIG_PRECONDITION_TAG = "sql:precondition";
@@ -29,7 +29,6 @@ public class SqlContentHandler extends DefaultHandler{
     private final static String CONTINUE_ON_ERROR_ATTRIBUTE = "continueOnError";
     private final static String CONTINUE_ON_FAILED_CONDITIONS_ATTRIBUTE = "continueOnFailedConditions";
     
-    private final Stack<String> tagsStack = new Stack<String>();
     private final StringBuilder tempVal = new StringBuilder();
     private final StringBuilder tempCondVal = new StringBuilder();
     
@@ -107,30 +106,6 @@ public class SqlContentHandler extends DefaultHandler{
         else{
             tempCondVal.append(ch, start, length); 
         } 
-    }
-    
-    private void pushTag(String tag){
-        tagsStack.push(tag);
-    }
-    
-    private String popTag(){
-        return tagsStack.pop();
-    }
-    
-    private boolean containsTag(String tag){
-        if(!tagsStack.isEmpty()){
-            return Arrays.asList(tagsStack.toArray()).contains(tag);
-        }
-        
-        return false;
-    }
-    
-    private String peekTag(){
-        if(!tagsStack.isEmpty()){
-            return tagsStack.peek();
-        }
-
-        return "";
     }
     
     public List<SQLBean> getSqlBeans(){

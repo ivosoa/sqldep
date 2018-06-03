@@ -6,17 +6,15 @@
 package com.iso.xml.handler;
 
 import com.iso.db.beans.DBConfig;
-import java.util.Arrays;
 import java.util.Stack;
 import org.xml.sax.Attributes;
-import org.xml.sax.helpers.DefaultHandler;
 
 
 /**
  *
  * @author isoares
  */
-public class ConfigHandler extends DefaultHandler{
+public class ConfigHandler extends AbstractHandler{
     
     private final static String CONFIG_ROOT_TAG = "db:configuration";
     private final static String CONFIG_URL_TAG = "db:url";
@@ -25,7 +23,6 @@ public class ConfigHandler extends DefaultHandler{
     private final static String CONFIG_JDBC_DRIVER_TAG = "db:jdbdriver";
     
     private DBConfig dbConfig;
-    private final Stack<String> tagsStack = new Stack<String>();
     private final StringBuilder tempVal = new StringBuilder();
 
     @Override
@@ -75,30 +72,6 @@ public class ConfigHandler extends DefaultHandler{
         tempVal.append(ch, start, length);
     }
     
-    private void pushTag(String tag){
-        tagsStack.push(tag);
-    }
-    
-    private String popTag(){
-        return tagsStack.pop();
-    }
-    
-    private boolean containsTag(String tag){
-        if(!tagsStack.isEmpty()){
-            return Arrays.asList(tagsStack.toArray()).contains(tag);
-        }
-        
-        return false;
-    }
-    
-    private String peekTag(){
-        if(!tagsStack.isEmpty()){
-            return tagsStack.peek();
-        }
-
-        return "";
-    }
-    
     public DBConfig getDbConfig() {
         return dbConfig;
     }
@@ -106,5 +79,4 @@ public class ConfigHandler extends DefaultHandler{
     public void setDbConfig(DBConfig dbConfig) {
         this.dbConfig = dbConfig;
     }
-    
 }
