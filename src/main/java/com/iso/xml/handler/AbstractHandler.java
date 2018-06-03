@@ -16,6 +16,7 @@ import org.xml.sax.helpers.DefaultHandler;
 public abstract class AbstractHandler extends DefaultHandler{
     
     protected final Stack<String> tagsStack = new Stack<String>();
+    protected final StringBuilder tempVal = new StringBuilder();
     
     protected void pushTag(String tag){
         tagsStack.push(tag);

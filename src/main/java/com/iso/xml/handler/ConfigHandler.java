@@ -6,7 +6,6 @@
 package com.iso.xml.handler;
 
 import com.iso.db.beans.DBConfig;
-import java.util.Stack;
 import org.xml.sax.Attributes;
 
 
@@ -16,24 +15,23 @@ import org.xml.sax.Attributes;
  */
 public class ConfigHandler extends AbstractHandler{
     
-    private final static String CONFIG_ROOT_TAG = "db:configuration";
-    private final static String CONFIG_URL_TAG = "db:url";
-    private final static String CONFIG_USER_TAG = "db:user";
-    private final static String CONFIG_PASSWORD_TAG = "db:password";
-    private final static String CONFIG_JDBC_DRIVER_TAG = "db:jdbdriver";
+    private final static String ROOT_TAG = "db:configuration";
+    private final static String DB_URL_TAG = "db:url";
+    private final static String DB_USER_TAG = "db:user";
+    private final static String DB_PASSWORD_TAG = "db:password";
+    private final static String DB_JDBC_DRIVER_TAG = "db:jdbdriver";
     
     private DBConfig dbConfig;
-    private final StringBuilder tempVal = new StringBuilder();
 
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes){
       String parentTag = peekTag();
       pushTag(qName);
       
-      if(qName.equals(CONFIG_ROOT_TAG) && parentTag.isEmpty()){
+      if(qName.equals(ROOT_TAG) && parentTag.isEmpty()){
           dbConfig = new DBConfig();
       }
-      else if(parentTag.equals(CONFIG_ROOT_TAG)){
+      else if(parentTag.equals(ROOT_TAG)){
           tempVal.setLength(0);
       }
     }
@@ -48,16 +46,16 @@ public class ConfigHandler extends AbstractHandler{
         popTag();
         
         switch (qName) {
-            case CONFIG_URL_TAG:
+            case DB_URL_TAG:
                 dbConfig.setDbUrl(tempVal.toString().trim());
                 break;
-            case CONFIG_USER_TAG:
+            case DB_USER_TAG:
                 dbConfig.setUser(tempVal.toString().trim());
                 break;
-            case CONFIG_PASSWORD_TAG:
+            case DB_PASSWORD_TAG:
                 dbConfig.setPassword(tempVal.toString().trim());
                 break;
-            case CONFIG_JDBC_DRIVER_TAG:
+            case DB_JDBC_DRIVER_TAG:
                 dbConfig.setJdbcDriver(tempVal.toString().trim());
                 break;
             default:
