@@ -8,6 +8,7 @@ package com.iso.xml;
 import com.iso.db.beans.DBConfig;
 import java.io.File;
 import java.util.List;
+import java.util.Map;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
@@ -75,7 +76,7 @@ public class ParseHelperTest {
         assertEquals("", config.getJdbcDriver());
     }
     
-     @Test
+    @Test
     public void testSQLStatements(){
         File file = new File(getClass().getResource("sql.xml").getPath());
         
@@ -92,4 +93,18 @@ public class ParseHelperTest {
         }
     }
     
+    @Test
+    public void testSQLHistory(){
+        File file = new File(getClass().getResource("executionhistory.xml").getPath());
+        
+        Map<String, String> history = pHelper.parseSqlHistory(file);
+        
+        assertNotNull(history);
+        
+        Map.Entry<String, String> entry = history.entrySet().iterator().next();
+        
+        String key = entry.getKey();
+        
+        assertEquals("testkey", key);
+    }
 }

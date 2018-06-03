@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<history:statements>
+    <history:statement key="testkey">
+        insert into table(id, value)
+        values(2, '1')
+    </history:statement>
+</history:statements>

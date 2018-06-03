@@ -7,10 +7,12 @@ package com.iso.xml;
 
 import com.iso.db.beans.DBConfig;
 import com.iso.xml.handler.ConfigHandler;
+import com.iso.xml.handler.SqlHistoryHandler;
 import com.iso.xml.handler.SqlContentHandler;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
@@ -77,4 +79,29 @@ public class ParseHelper {
         return null;
     } 
     
+    public Map<String, String> parseSqlHistory(File file){
+        if(file == null){
+            return null;
+        }
+        
+        try {
+            SAXParserFactory factory = SAXParserFactory.newInstance();
+            SAXParser parser = factory.newSAXParser();
+            
+            SqlHistoryHandler handler = new SqlHistoryHandler();
+            parser.parse(file, handler);
+            
+            
+            return handler.getHistoryMap();
+            
+        } catch (ParserConfigurationException ex) {
+            Logger.getLogger(ParseHelper.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SAXException ex) {
+            Logger.getLogger(ParseHelper.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(ParseHelper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null;
+    } 
 }
