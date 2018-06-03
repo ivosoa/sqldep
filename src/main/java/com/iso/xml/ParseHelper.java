@@ -11,6 +11,7 @@ import com.iso.xml.handler.SqlHistoryHandler;
 import com.iso.xml.handler.SqlContentHandler;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -53,20 +54,31 @@ public class ParseHelper {
         return null;
     }
     
-    public List<SQLBean> parseSqlStatements(File file){
-        if(file == null){
+    public List<SQLBean> parseSqlStatements(File files){
+        if(files == null){
             return null;
         }
+        
+        List<SQLBean> sqlStatements = new ArrayList<SQLBean>();
         
         try {
             SAXParserFactory factory = SAXParserFactory.newInstance();
             SAXParser parser = factory.newSAXParser();
             
             SqlContentHandler handler = new SqlContentHandler();
-            parser.parse(file, handler);
             
+            if(files.isDirectory()){
+                for(File file: files.listFiles()){
+                    parser.parse(file, handler);
+                    sqlStatements.addAll(handler.getSqlBeans());
+                }
+            }
+            else{
+                 parser.parse(files, handler);
+                 sqlStatements.addAll(handler.getSqlBeans());
+            }
             
-            return handler.getSqlBeans();
+            return sqlStatements;
             
         } catch (ParserConfigurationException ex) {
             Logger.getLogger(ParseHelper.class.getName()).log(Level.SEVERE, null, ex);
