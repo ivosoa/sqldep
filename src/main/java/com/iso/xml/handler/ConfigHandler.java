@@ -65,16 +65,10 @@ public class ConfigHandler extends AbstractHandler{
     
     @Override
     public void characters(char ch[], int start, int length){
-        String tag = peekTag();
-        
         tempVal.append(ch, start, length);
     }
     
     public DBConfig getDbConfig() {
         return dbConfig;
-    }
-
-    public void setDbConfig(DBConfig dbConfig) {
-        this.dbConfig = dbConfig;
     }
 }
