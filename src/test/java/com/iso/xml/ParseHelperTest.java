@@ -88,6 +88,7 @@ public class ParseHelperTest {
             assertNotNull(sqlBean.getSqlStatement());
             assertEquals(1, sqlBean.getPreconditions().size());
             assertEquals(1, sqlBean.getPostconditions().size());
+            assertEquals(true, sqlBean.getRepeatable());
         }
     }
     

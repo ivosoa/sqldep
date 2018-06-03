@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <sql:statements>
-    <sql:statement>
+    <sql:statement repeatable="true">
         <sql:precondition expected="1">select * from table where id > 1</sql:precondition>
         <sql:postcondition expected="2">select * from table where id > 1</sql:postcondition>
         insert into table(id, value)

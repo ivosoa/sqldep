@@ -18,6 +18,9 @@ public class SQLBean {
     private List<PreCondition> preconditions = new ArrayList<PreCondition>();
     private List<PostCondition> postconditions = new ArrayList<PostCondition>();
     private String sqlStatement;
+    private Boolean repeatable;
+    private Boolean continueOnError;
+    private Boolean continueOnFailedConditions;
     
     public void addPrecondition(PreCondition precondition){
         preconditions.add(precondition);
@@ -51,4 +54,28 @@ public class SQLBean {
         this.sqlStatement = sqlStatement;
     }
     
+    public Boolean getRepeatable() {
+        return repeatable;
+    }
+
+    public void setRepeatable(Boolean repeatable) {
+        this.repeatable = repeatable;
+    }
+
+    public Boolean getContinueOnError() {
+        return continueOnError;
+    }
+
+    public void setContinueOnError(Boolean continueOnError) {
+        this.continueOnError = continueOnError;
+    }
+
+    public Boolean getContinueOnFailedConditions() {
+        return continueOnFailedConditions;
+    }
+
+    public void setContinueOnFailedConditions(Boolean continueOnFailedConditions) {
+        this.continueOnFailedConditions = continueOnFailedConditions;
+    }
+
 }

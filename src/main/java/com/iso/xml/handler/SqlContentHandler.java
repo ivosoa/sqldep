@@ -25,6 +25,9 @@ public class SqlContentHandler extends DefaultHandler{
     private final static String CONFIG_PRECONDITION_TAG = "sql:precondition";
     private final static String CONFIG_POSTCONDITION_TAG = "sql:postcondition";
     private final static String CONDITION_EXPECTED_ATTRIBUTE = "expected";
+    private final static String REPEATABLE_ATTRIBUTE = "repeatable";
+    private final static String CONTINUE_ON_ERROR_ATTRIBUTE = "continueOnError";
+    private final static String CONTINUE_ON_FAILED_CONDITIONS_ATTRIBUTE = "continueOnFailedConditions";
     
     private final Stack<String> tagsStack = new Stack<String>();
     private final StringBuilder tempVal = new StringBuilder();
@@ -42,6 +45,13 @@ public class SqlContentHandler extends DefaultHandler{
       
       if(qName.equals(CONFIG_SQL_STATEMENT_TAG) && parentTag.equals(CONFIG_ROOT_TAG)){
           sqlBean = new SQLBean();
+          String repeatable = attributes.getValue(REPEATABLE_ATTRIBUTE);
+          String continueOnError = attributes.getValue(CONTINUE_ON_ERROR_ATTRIBUTE);
+          String continueOnFailedConditions = attributes.getValue(CONTINUE_ON_FAILED_CONDITIONS_ATTRIBUTE);
+          sqlBean.setRepeatable(Boolean.valueOf(repeatable));
+          sqlBean.setContinueOnError(Boolean.valueOf(continueOnError));
+          sqlBean.setContinueOnFailedConditions(Boolean.valueOf(continueOnFailedConditions));
+          
           tempVal.setLength(0);
       }
       else if(qName.equals(CONFIG_PRECONDITION_TAG) && parentTag.equals(CONFIG_SQL_STATEMENT_TAG)){
