@@ -5,6 +5,7 @@
  */
 package com.iso.xml;
 
+import com.iso.xml.beans.SQLBean;
 import com.iso.db.beans.DBConfig;
 import java.io.File;
 import java.util.List;

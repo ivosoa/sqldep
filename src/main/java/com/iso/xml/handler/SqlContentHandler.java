@@ -7,7 +7,7 @@ package com.iso.xml.handler;
 
 import com.iso.db.conditions.PostCondition;
 import com.iso.db.conditions.PreCondition;
-import com.iso.xml.SQLBean;
+import com.iso.xml.beans.SQLBean;
 import java.util.ArrayList;
 import java.util.List;
 import org.xml.sax.Attributes;
